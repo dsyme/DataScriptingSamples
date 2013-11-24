@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1613C79-A51E-4BE1-86A0-645CD216DCAA}"
+	ProjectSection(SolutionItems) = preProject
+		AzureDataMarketExample.fsx = AzureDataMarketExample.fsx
+		FSharpChartingExample1-gtk.fsx = FSharpChartingExample1-gtk.fsx
+		FSharpChartingExample1.fsx = FSharpChartingExample1.fsx
+		HadoopAnalysisExample.fsx = HadoopAnalysisExample.fsx
+		HDInsightExample.fsx = HDInsightExample.fsx
+		KMeansExample1.fsx = KMeansExample1.fsx
+		KMeansExample2.fsx = KMeansExample2.fsx
+		LinearRegressionExample1.fsx = LinearRegressionExample1.fsx
+		LogisticRegressionExample1.fsx = LogisticRegressionExample1.fsx
+		MathDotNetExample.fsx = MathDotNetExample.fsx
+		NotifyDataExample1.fsx = NotifyDataExample1.fsx
+		ODataExamples.fsx = ODataExamples.fsx
+		packages.cmd = packages.cmd
+		packages.config = packages.config
+		RandomForestExample1.fsx = RandomForestExample1.fsx
+		RandomForestExample1b.fsx = RandomForestExample1b.fsx
+		RandomForestExample2.fsx = RandomForestExample2.fsx
+		README.md = README.md
+		SqlConnectionExample1.fsx = SqlConnectionExample1.fsx
+		SqlEntityCodeFirst.fs = SqlEntityCodeFirst.fs
+		SqlEntityConnectionExample1.fsx = SqlEntityConnectionExample1.fsx
+		TradingGameExample1.fsx = TradingGameExample1.fsx
+		WebCrawlExample.fsx = WebCrawlExample.fsx
+		WebDataExample.fsx = WebDataExample.fsx
+		WebServiceExample.fsx = WebServiceExample.fsx
+		WorldBankExample.fsx = WorldBankExample.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "minimath", "minimath", "{B9A30F15-57AC-4475-9F6A-FB2A1A5F8155}"
+	ProjectSection(SolutionItems) = preProject
+		minimath\KMeans-0.1.fsx = minimath\KMeans-0.1.fsx
+		minimath\LinearRegression-0.1.fsx = minimath\LinearRegression-0.1.fsx
+		minimath\LinearRegressionData.fsx = minimath\LinearRegressionData.fsx
+		minimath\LogisticRegression-0.1.fsx = minimath\LogisticRegression-0.1.fsx
+		minimath\MatrixDense-0.1.fs = minimath\MatrixDense-0.1.fs
+		minimath\MatrixDense-0.1.fsi = minimath\MatrixDense-0.1.fsi
+		minimath\MatrixSparseDense-0.1.fs = minimath\MatrixSparseDense-0.1.fs
+		minimath\MatrixSparseDense-0.1.fsi = minimath\MatrixSparseDense-0.1.fsi
+		minimath\NumericUtilities-0.1.fsx = minimath\NumericUtilities-0.1.fsx
+		minimath\RandomForest-0.1.fsx = minimath\RandomForest-0.1.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extlib", "extlib", "{41FCB8B5-C502-4D3D-9288-ADF6492E571B}"
+	ProjectSection(SolutionItems) = preProject
+		extlib\ArrayEx-0.1.fsx = extlib\ArrayEx-0.1.fsx
+		extlib\AsyncEx-0.1.fsx = extlib\AsyncEx-0.1.fsx
+		extlib\AsyncSeq-0.1.fsx = extlib\AsyncSeq-0.1.fsx
+		extlib\EventEx-0.1.fsx = extlib\EventEx-0.1.fsx
+		extlib\FlatList.fsx = extlib\FlatList.fsx
+		extlib\FluentEx-0.1.fsx = extlib\FluentEx-0.1.fsx
+		extlib\LinqEx-0.1.fsx = extlib\LinqEx-0.1.fsx
+		extlib\NotifyData-0.1.fsx = extlib\NotifyData-0.1.fsx
+		extlib\ODataEx-0.1.fsx = extlib\ODataEx-0.1.fsx
+		extlib\QueryEx-0.1.fsx = extlib\QueryEx-0.1.fsx
+		extlib\SeqEx-0.1.fsx = extlib\SeqEx-0.1.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vizlib", "vizlib", "{FC80BFA4-7CD9-4CC7-A637-51FF5553D8B2}"
+	ProjectSection(SolutionItems) = preProject
+		vizlib\load-gtk.fsx = vizlib\load-gtk.fsx
+		vizlib\load-wpf.fsx = vizlib\load-wpf.fsx
+		vizlib\show.fsx = vizlib\show.fsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{6CB0D76D-5FA4-46E4-89AC-68B913B77D13}"
+	ProjectSection(SolutionItems) = preProject
+		data\LinearRegressionData.fsx = data\LinearRegressionData.fsx
+		data\LogisticRegressionExampleData.fsx = data\LogisticRegressionExampleData.fsx
+		data\NORTHWND.MDF = data\NORTHWND.MDF
+		data\WdbcExampleData.fsx = data\WdbcExampleData.fsx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9A30F15-57AC-4475-9F6A-FB2A1A5F8155} = {E1613C79-A51E-4BE1-86A0-645CD216DCAA}
+		{41FCB8B5-C502-4D3D-9288-ADF6492E571B} = {E1613C79-A51E-4BE1-86A0-645CD216DCAA}
+		{FC80BFA4-7CD9-4CC7-A637-51FF5553D8B2} = {E1613C79-A51E-4BE1-86A0-645CD216DCAA}
+		{6CB0D76D-5FA4-46E4-89AC-68B913B77D13} = {E1613C79-A51E-4BE1-86A0-645CD216DCAA}
+	EndGlobalSection
+EndGlobal
