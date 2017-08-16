@@ -1,6 +1,4 @@
-﻿
-#load "extlib/NotifyData-0.1.fsx"
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+﻿#load "packages/FSharp.Charting/FSharp.Charting.fsx"
 
 open FSharp.Charting
 
@@ -59,14 +57,6 @@ Chart.Column(Name="Count",data=[ for ((commodity, faceValue, maxCards) as c)  in
 // TODO: how to label all points?
 Chart.Column(data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, avgPoints c ])
 
-Chart.Pie(Name="Pie", data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, maxPoints c ])
-Chart.Funnel(Name="Funnel", data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, maxPoints c ])
-Chart.Kagi(Name="Kagi", data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, maxPoints c ])
-Chart.Polar(Name="Polar", data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  faceValue, maxPoints c ])
-Chart.Pyramid(Name="Pyramid", data=[ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, maxPoints c ])
-Chart.Pyramid(Name="Pyramid", data=([ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, maxPoints c ] |> Seq.sortBy snd))
-Chart.Pyramid(Name="Pyramid", data=([ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, avgPoints c ] |> Seq.sortBy snd))
-Chart.Pyramid(Name="Pyramid", data=([ for ((commodity, faceValue, maxCards) as c)  in commodities ->  sprintf "%A" commodity, avgPointsPerFacePoint c ] |> Seq.sortBy snd))
 
 let square x = x * x
 

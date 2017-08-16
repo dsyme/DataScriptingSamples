@@ -1,11 +1,11 @@
 
 #r "System.Data.Linq.dll"
-#r "FSharp.Data.TypeProviders.dll"
+#r "packages/FSharp.Data.TypeProviders/lib/net40/FSharp.Data.TypeProviders.dll"
 #load "vizlib/show.fsx"
 open System
 open System.Linq
-open Microsoft.FSharp.Linq
-open Microsoft.FSharp.Data.TypeProviders
+open FSharp.Linq
+open FSharp.Data.TypeProviders
 
 type NorthwndDb = 
     SqlDataConnection<ConnectionString = const (@"AttachDBFileName  = '" + __SOURCE_DIRECTORY__ + @"\data\northwnd.mdf';Server='.\SQLEXPRESS';User Instance=true;;Integrated Security=SSPI"),Pluralize=true>
@@ -17,7 +17,6 @@ let customerNames =
             where  (c.City = "London")
             select c.ContactName }
     |> teeGrid
-
 
 
 
@@ -46,7 +45,6 @@ let managersWithEmployeesInLondon3 =
     |> teeGrid
 
 
-query {if 1 = 2 then select 3};; 
 
 let customerWithNamesStartingWithB = 
     query { for c in db.Customers do 
@@ -59,6 +57,7 @@ let customersAverageOrders =
     query { for c in db.Customers do 
             averageBy (float c.Orders.Count) }
     |> teeGrid
+
 
 let customersSortedByCountry = 
     query { for c in db.Customers do 
@@ -79,10 +78,6 @@ let joinCustomersAndEmployeesByName =
             join e in db.Employees on (c.Country = e.Country)
             select (c.ContactName, e.LastName) }  
     |> teeGrid
-
-
-
-
 
 
 

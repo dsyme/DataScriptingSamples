@@ -21,6 +21,7 @@ let countries =
      data.Countries.Malaysia
      data.Countries.Singapore
      data.Countries.Germany
+     data.Countries.``United Kingdom``
      data.Countries.``United States``
      data.Countries.India
      data.Countries.Afghanistan
@@ -30,14 +31,15 @@ let countries =
 
 
 /// Chart the populations, un-normalized
-Chart.Combine([ for c in countries -> Chart.Line (c.Indicators.``Population ages 0-14 (% of total)``, Name=c.Name) ])
-     .WithTitle("Population, 1960-2012")
+Chart.Combine([ for c in countries -> Chart.Line (c.Indicators.``GDP (current US$)``, Name=c.Name) ])
+     .WithTitle("GDP (current US$), 1960-2012")
+     .WithLegend(Enabled=true)
 
 
 
 
 Chart.Pie
-   [ for c in countries -> c.Name,  c.Indicators.``Population, total``.GetValueAtOrZero(2001) ]
+   [ for c in countries -> c.Name,  c.Indicators.``Population, total``.[2001] ]
 
 
 let countries1 = 
@@ -48,8 +50,8 @@ let countries1 =
 
 let pointdata = 
     [ for country in countries1 ->
-          let y = country.Indicators.``Adolescent fertility rate (births per 1,000 women ages 15-19)``.GetValueAtOrZero(2005)
-          let x = country.Indicators.``Primary completion rate, female (% of relevant age group)``.GetValueAtOrZero(2005)
+          let y = country.Indicators.``Adolescent fertility rate (births per 1,000 women ages 15-19)``.[2005]
+          let x = country.Indicators.``Primary completion rate, female (% of relevant age group)``.[2005]
           x,y ]
                  
 
@@ -114,13 +116,13 @@ let (++) xs ys = Seq.append xs ys
 
 let popAt year =
  ((query { for c in data.Countries  do 
-           let pop = c.Indicators.``Population, total``.GetValueAtOrZero(year) 
+           let pop = c.Indicators.``Population, total``.TryGetValueAt(year) |> (fun c -> defaultArg c 0.0)
            where (pop > 15000000.0) 
            select (c.Name, pop) }
    ++
    [ ("Other", 
       query { for c in data.Countries  do 
-              let pop = c.Indicators.``Population, total``.GetValueAtOrZero(year) 
+              let pop = c.Indicators.``Population, total``.TryGetValueAt(year) |> (fun c -> defaultArg c 0.0)
               where (pop < 15000000.0) 
               sumBy (pop) }) ])
    
@@ -166,12 +168,6 @@ Chart.Combine
 
 
 
-Chart.Combine 
-    [ for c in countries ->
-        let data = c.Indicators.``Malnutrition prevalence, height for age (% of children under 5)``
-        Chart.Line (data, Name=c.Name) ]
-    |> fun c -> c.WithTitle("Malnutrition for Children under 5, compared")
-
 
 // ----------------------------------------------------------------------------
 // How are we doing on debt?
@@ -203,7 +199,7 @@ open System.Drawing
 /// (This is slow because it needs to download info for every EU country)
 let avgEU =
     [ for c in data.Regions.``European Union``.Countries do
-        yield! c.Indicators.``School enrollment, tertiary (% gross)`` ]
+        yield! c.Indicators.``School enrollment, tertiary (gross), gender parity index (GPI)`` ]
     |> Seq.groupBy fst
     |> Seq.map (fun (y, v) -> y, Seq.averageBy snd v)
     |> Array.ofSeq
@@ -213,7 +209,7 @@ let avgEU =
 /// (This is slow because it needs to download info for every OECD country)
 let avgOECD =
     [ for c in data.Regions.``OECD members``.Countries do
-        yield! c.Indicators.``School enrollment, tertiary (% gross)`` ]
+        yield! c.Indicators.``School enrollment, tertiary (gross), gender parity index (GPI)`` ]
     |> Seq.groupBy fst
     |> Seq.map (fun (y, v) -> y, Seq.averageBy snd v)
     |> Array.ofSeq
@@ -224,82 +220,10 @@ Chart.Combine
   [ yield Chart.Line(avgEU, Name="EU", Color=Color.Blue)
     yield Chart.Line(avgOECD, Name="OECD", Color=Color.Goldenrod)
     let cze = data.Countries.``Czech Republic``
-    yield Chart.Line(data=cze.Indicators.``School enrollment, tertiary (% gross)``,Name="CZ",Color=Color.DarkRed)  ]
+    yield Chart.Line(data=cze.Indicators.``School enrollment, tertiary (gross), gender parity index (GPI)``,Name="CZ",Color=Color.DarkRed)  ]
 |> fun c -> c.WithLegend(Docking = Docking.Left)
 
 
 
 
-
-(*
-
-//.WithYAxis(MajorGrid = dashGrid).WithAxisX(MajorGrid = dashGrid)
-//|> Chart.WithTitle("Czech, EU and OECD University Enrollments", Color=Color.Black, Docking=Docking.Top)
-
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-// Other tests....
-
-
-data.Countries.Australia.Indicators.``Improved water source (% of population with access)``
-data.Countries.Afghanistan.Indicators.``Improved water source (% of population with access)``
-data.Countries.China.Indicators.``Improved water source (% of population with access)``
-Chart.Combine 
-    [ for c in countries ->
-        let data = c.Indicators.``Improved water source (% of population with access)``
-        Chart.Line (data, Name=c.Name) ]
-                
-
-
-data.Countries.France.Indicators.``ARI treatment (% of children under 5 taken to a health provider)``.Source
-
-data.Countries.Afghanistan.Code
-data.Countries.Denmark.Indicators.``Debt buyback (current US$)``.Source 
-data.Countries.Denmark.Indicators.``Total reserves (% of total external debt)``.Source
-data.Countries.Denmark.Indicators.``Short-term debt (% of total reserves)``.Source
-data.Countries.Afghanistan.Indicators.``Access to electricity (% of population)``.Source
-
-// ----------------------------------------------------------------------------
-// Access the data....
-
-data.Countries.Greece.Indicators.``Land under cereal production (hectares)``.Source
-data.Countries.Greece.Indicators.``ARI treatment (% of children under 5 taken to a health provider)``
-data.Countries.Afghanistan.Indicators.``Access to electricity (% of population)``
-data.Countries.Greece.Indicators.``Access to electricity (% of population)``
-data.Countries.Greece.Indicators.``Adjusted net national income (annual % growth)``
-data.Countries.Greece.Indicators.``Adjusted net national income (annual % growth)``
-
-data.Countries.Australia.Indicators.``Land area (sq. km)`` 
-data.Countries.Australia.Indicators.``Land under cereal production (hectares)``
-data.Countries.Australia.Indicators.``Land under cereal production (hectares)``
-
-
-data.Countries.Greece.Indicators.``Central government debt, total (% of GDP)``
-
-// Area covered by forests in World and different EU countries
-//http://api.worldbank.org/regions/WLD/indicators/AG.LND.AGRI.ZS?per_page=1000&date=1900%3a2050&page=1
-//http://api.worldbank.org/countries/WLD/indicators/AG.LND.AGRI.ZS?per_page=1000&date=1900%3a2050&page=1
-data.Regions.World.Countries
-data.Regions.World.Countries.
-data.Regions.``European Union``.Countries
-data.Regions.World.Indicators.``Access to electricity (% of population)``
-data.Regions.World.Indicators.``Agricultural land (% of land area)``
-
- .Countries.World.``Forest area (% of land area)``
-|> Seq.sortBy fst
-
-let euforests = 
-  [ for country in WorldBank.Regions.``European Union`` do
-      let forests = country.``Forest area (% of land area)`` |> Seq.sortBy fst |> Seq.toArray
-      yield country, snd forests.[forests.Length - 1] ]
-
-euforests |> List.sortBy (fun (_, f) -> -f) 
-
-*)
-// TODO: add static and dynamic parameters to turn off caching of values
-// TODO:  alwaysFresh=true 
-// TODO: add TickMarks=[1960..3..2010] to FSharpChart
-
-//type T = Samples.WorldBankDataProvider<"World Development Indicators">
 

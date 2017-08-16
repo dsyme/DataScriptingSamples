@@ -1,24 +1,22 @@
-
-
 [<AutoOpen>]
 module ShowWpf
 
-#load "load-wpf.fsx"
+#r "PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "System.Xaml"
 
 open System.Reflection
 open System.ComponentModel
 open System
 open System.Windows
-open System.Windows.Input
 open System.Windows.Controls
 open System.Windows.Data
 open System.Windows.Media
-open System.Windows.Media.Imaging
-open System.Windows.Documents
 
 let quotes = 
-    [| "F# - The Language For Big, Big Data!"; 
-       "Learn about F# at www.fsharp.net"; 
+    [| "F# - Fun With Data"; 
+       "Learn about F# at fsharp.org"; 
        "F# - Simple Code for Complex Problems" |]
 
 let quote = quotes.[Random(DateTime.Now.Second).Next(quotes.Length)] 
@@ -93,7 +91,7 @@ let showGrid (obj: obj) =
             let dg = System.Windows.Controls.DataGrid(AutoGenerateColumns=false,HorizontalScrollBarVisibility=ScrollBarVisibility.Auto,VerticalScrollBarVisibility=ScrollBarVisibility.Auto)
             begin 
                 let e = seq.GetEnumerator()
-                use _e = (e :?> System.IDisposable)
+                use _e = (match e with :? System.IDisposable as d -> d | _ -> null)
                 if e.MoveNext() then 
                     let sampleObj = e.Current
                     match sampleObj with 

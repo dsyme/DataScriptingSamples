@@ -29,12 +29,12 @@ let featureExtractor (p:Observation) = [| p.Time / maxTime; p.Location / maxLoc 
 let firstCentroids = 
     kmeans data featureExtractor initialCentroids
        |> Seq.map (Array.map (fun (c,_) -> c.[0] * maxTime, c.[1] * maxLoc))
-       |> Seq.nth 1
+       |> Seq.item 1
 
 let finalCentroids = 
     kmeans data featureExtractor initialCentroids
        |> Seq.map (Array.map (fun (c,_) -> c.[0] * maxTime, c.[1] * maxLoc))
-       |> Seq.nth 100 
+       |> Seq.item 100 
 
 Chart.Combine 
   [ Chart.Point [ for i in data -> i.Time, i.Location ]

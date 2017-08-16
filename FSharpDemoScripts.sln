@@ -65,7 +65,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vizlib", "vizlib", "{FC80BFA4-7CD9-4CC7-A637-51FF5553D8B2}"
 	ProjectSection(SolutionItems) = preProject
 		vizlib\load-gtk.fsx = vizlib\load-gtk.fsx
-		vizlib\load-wpf.fsx = vizlib\load-wpf.fsx
 		vizlib\show.fsx = vizlib\show.fsx
 	EndProjectSection
 EndProject

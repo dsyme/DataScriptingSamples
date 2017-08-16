@@ -1,5 +1,5 @@
 #load "extlib/EventEx-0.1.fsx"
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+#load @"packages\FSharp.Charting\FSharp.Charting.fsx"
 
 open FSharp.Charting
 open FSharp.Charting.ChartTypes

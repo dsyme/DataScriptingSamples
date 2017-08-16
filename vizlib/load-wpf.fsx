@@ -2,14 +2,15 @@
 // A script utility which enables the use WPF within F# Interactive (fsi.exe)
 //-----------------------------------------------------------------------------
 
-#r "PresentationCore.dll"
-#r "PresentationFramework.dll"
-#r "WindowsBase.dll"
-#r "System.Xaml.dll"
+#r "PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+#r "System.Xaml"
+
+(*
 
 open System.Windows
 open System.Windows.Threading
-
 #if INTERACTIVE
 fsi.EventLoop <-  
     let app  = 
@@ -31,3 +32,4 @@ fsi.EventLoop <-
          member x.ScheduleRestart() =   () }
 
 #endif
+*)

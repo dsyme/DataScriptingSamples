@@ -1,8 +1,8 @@
 #r "System.Data.Linq.dll"
-#r "FSharp.Data.TypeProviders.dll"
 #r "System.Data.dll"
 #r "System.ComponentModel.DataAnnotations.dll"
 #r "System.Data.Entity.dll"
+#r "packages/FSharp.Data.TypeProviders/lib/net40/FSharp.Data.TypeProviders.dll"
 
 #load "vizlib/show.fsx"
 
@@ -14,10 +14,10 @@ open System.Data.SqlClient
 open System.Data.Sql
 open System.Linq
 open Microsoft.FSharp.Linq
-open Microsoft.FSharp.Data.TypeProviders
+open FSharp.Data.TypeProviders
 
 type NorthwndDb = 
-    SqlEntityConnection<ConnectionString = @"AttachDBFileName  = 'C:\projects\openfsharp\Scripts\northwnd.mdf';Server='.\SQLEXPRESS';User Instance=true;Integrated Security=SSPI",Pluralize=true>
+    SqlEntityConnection<ConnectionString = const (@"AttachDBFileName  = '" + __SOURCE_DIRECTORY__ + @"\data\northwnd.mdf';Server='.\SQLEXPRESS';User Instance=true;;Integrated Security=SSPI"),Pluralize=true>
 
 let db = NorthwndDb.GetDataContext()
 
