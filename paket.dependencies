@@ -1,0 +1,8 @@
+frameworks: net45
+source https://nuget.org/api/v2
+nuget FSharp.Data.TypeProviders 
+nuget FSharp.Core.Fluent-4.0
+nuget FSharp.Text.RegexProvider
+nuget MathNet.Numerics.Data.Matlab
+nuget Suave
+nuget FsLab
