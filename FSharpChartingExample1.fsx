@@ -1,5 +1,8 @@
 #load "extlib/EventEx-0.1.fsx"
-#load @"packages\FSharp.Charting\FSharp.Charting.fsx"
+#r "nuget:include=FSharp.Data, version=3.0.0"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
+
 
 open FSharp.Charting
 open FSharp.Charting.ChartTypes

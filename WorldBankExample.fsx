@@ -2,15 +2,15 @@
 // ----------------------------------------------------------------------------
 // Load the charting library
 
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+#r "nuget:include=FSharp.Data, version=3.0.0"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
 
 open FSharp.Charting
 open FSharp.Charting.ChartTypes
  
 // ----------------------------------------------------------------------------
 // Reference the provider for the World Bank and explore the data
-
-#r "packages/FSharp.Data/lib/net40/FSharp.Data.dll"
 
 
 let data = FSharp.Data.WorldBankData.GetDataContext()
@@ -64,39 +64,6 @@ Chart.Point(pointdata)
 
 data.Countries.Australia.Indicators.``Population, total``
 
-// ----------------------------------------------------------------------------
-// Work with time series data
-
-#load "packages/Deedle/Deedle.fsx"
-
-
-data.Countries.``United States``.Indicators.``Health expenditure, total (% of GDP)``
-|> Chart.Line
-
-
-let countries2 = 
-  [ data.Countries.``United States``; data.Countries.Switzerland
-    data.Countries.Denmark; data.Countries.``United Kingdom``;
-    data.Countries.``Czech Republic`` ]
-
-Chart.Combine([ for country in countries2 ->
-                    let data = country.Indicators.``Health expenditure per capita (current US$)``
-                    Chart.Line(data, Name=country.Name) ])
-     .WithTitle("Health expenditure per capita (current US$)")
-     .WithLegend(InsideArea=false)
-
-
-Chart.Combine([ for country in countries2 ->
-                    let data = country.Indicators.``Mortality rate, infant (per 1,000 live births)``
-                    Chart.Line(data, Name=country.Name) ])
-     .WithTitle("Mortality rate, infant (per 1,000 live births)")
-     .WithXAxis(Max=2011.0 (* , TickMarks=[1960..3..2010] *) )
-             
-
-
-
-
-
 
 
 
@@ -129,7 +96,6 @@ let popAt year =
    |> Seq.sortBy snd)
 
 #load "extlib/AsyncSeq-0.1.fsx"
-open FSharp.Charting.ChartTypes
 
 open Samples.FSharp.AsyncSeq
 asyncSeq { for year in 1960..10..2009 do yield popAt year; do! Async.Sleep 1000 } 

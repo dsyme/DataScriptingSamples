@@ -1,7 +1,13 @@
 
-#load "extlib/EventEx-0.1.fsx"
-#load "packages/FsLab/FsLab.fsx"
-#load "vizlib/show.fsx"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#r "nuget:include=MathNet.Numerics, version=4.7.0"
+#r "nuget:include=MathNet.Numerics.FSharp, version=4.7.0"
+#r "nuget:include=MathNet.Numerics.Data.Matlab, version=4.0.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
+#r "nuget:include=Deedle, version=2.0.0-beta01"
+#load "../extlib/EventEx-0.1.fsx"
+//#load "packages/FsLab/FsLab.fsx"
+#load "../vizlib/show.fsx"
 
 open FSharp.Charting
 
@@ -111,8 +117,8 @@ let alignedData = f1.Join(f2, JoinKind.Outer)
 
 // 12:00 AM today, in current time zone
 let today = DateTimeOffset(DateTime.Today)
-let stock1 = randomPrice 1 0.1 3.0 20.0 today 
-let stock2 = randomPrice 2 0.2 1.5 22.0 today
+let stock1 = randomPrice 0.1 3.0 20.0 (TimeSpan.FromMinutes(1.0)) 500 
+let stock2 = randomPrice 0.2 1.5 20.0 (TimeSpan.FromSeconds(30.0)) 1000
 
 let integrateByMidpointRule (f : float<'u> -> float<'v>) (a : float<'u>, b : float<'u>) = 
     (b - a) * f ( (a+b) / 2.0)

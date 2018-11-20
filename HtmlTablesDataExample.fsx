@@ -2,9 +2,11 @@
 // HTML Table data type provider samples
 
 
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
-#r "packages/FSharp.Data/lib/net40/FSharp.Data.dll"
+#r "nuget:include=FSharp.Data, version=3.0.0"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
 #r "System.Xml.Linq.dll"
+
 open FSharp.Charting
 open FSharp.Data
 
@@ -18,8 +20,7 @@ let mrktDepthData = MarketDepth.GetSample()
 
 let mrktDepthTable = mrktDepthData.Tables.MyTable1
 
-//for row in mrktDepthTable.Rows do 
-//   row.
+[ for row in mrktDepthTable.Rows -> row.ABV ]
 
 // Look at the most recent row. Note the 'Date' property
 // is of type 'DateTime' and 'Open' has a type 'decimal'
@@ -61,14 +62,16 @@ Chart.Column stats
 
 
 
-let doctorWho = new HtmlProvider<"http://en.wikipedia.org/wiki/List_of_Doctor_Who_serials">()
+let doctorWho = new HtmlProvider<"https://en.wikipedia.org/wiki/List_of_Doctor_Who_episodes_(1963%E2%80%931989)">()
+
+//let doctorWho2 = new HtmlProvider<"https://en.wikipedia.org/wiki/List_of_Doctor_Who_episodes_(2005%E2%80%93present)">()
 
 // Get the average number of viewers for each doctor
 let viewersByDoctor = 
-    doctorWho.Tables.``Series overview``.Rows 
+    doctorWho .Tables.``Series overview``.Rows 
     |> Seq.groupBy (fun row -> row.Doctor)
     |> Seq.map (fun (doctor, seasons) -> 
-         doctor, seasons |> Seq.averageBy (fun season -> try float season.Episodes with _ -> 0.0))
+         doctor, seasons |> Seq.averageBy (fun season -> try float season.Episodes with _ -> nan))
     |> Seq.toArray
 
 // Visualize it

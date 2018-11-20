@@ -2,7 +2,8 @@
 // JSON data type provider samples
 
 
-#r "packages/FSharp.Data/lib/net40/FSharp.Data.dll"
+#r "nuget:include=FSharp.Data, version=3.0.0"
+
 open FSharp.Data
 open FSharp.Data.JsonExtensions
 
@@ -154,7 +155,7 @@ let newIssue = GitHubIssue.Issue("Test issue",
 //------------------------------------------------
 // Loading world bank data as JSON (using a schema)
 
-type WorldBank = JsonProvider<"data/WorldBank.json">
+type WorldBank = JsonProvider< const (__SOURCE_DIRECTORY__ + "/data/WorldBank.json")>
 let doc = WorldBank.GetSample()
 
 let docAsync = WorldBank.AsyncLoad("http://api.worldbank.org/country/cz/indicator/GC.DOD.TOTL.GD.ZS?format=json")

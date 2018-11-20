@@ -1,14 +1,16 @@
-#r "packages/MathNet.Numerics/lib/Net40/MathNet.Numerics.dll"
-#r "packages/MathNet.Numerics.FSharp/lib/Net40/MathNet.Numerics.FSharp.dll"
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
-#r @"packages\MathNet.Numerics.Data.Matlab\lib\net40\MathNet.Numerics.Data.Matlab.dll"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
+#r "nuget:include=MathNet.Numerics, version=4.7.0"
+#r "nuget:include=MathNet.Numerics.FSharp, version=4.7.0"
+#r "nuget:include=MathNet.Numerics.Data.Matlab, version=4.0.0"
+#load "minimath/KMeans-0.1.fsx"
 
 open FSharp.Charting
 open MathNet.Numerics.Distributions
 open MathNet.Numerics.LinearAlgebra.Double
 open MathNet.Numerics.LinearAlgebra
 open MathNet.Numerics.Statistics
-open Mcmc
+open MathNet.Numerics.Statistics.Mcmc
 
 let N = 10000
 let rnd = System.Random()
@@ -197,8 +199,6 @@ module Misc =
 
     open System.Numerics
     open MathNet.Numerics
-    open MathNet.Numerics.Distributions 
-    open MathNet.Numerics.Statistics
     open MathNet.Numerics.IntegralTransforms
 
     let data2 = seq { for i in 0 .. 10000000 -> rand()  }

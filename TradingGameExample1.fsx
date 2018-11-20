@@ -1,4 +1,5 @@
-﻿#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+﻿#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
 
 open FSharp.Charting
 
@@ -65,5 +66,3 @@ let maxValues =
 
 let maxiumPointCount = maxValues |> List.sumBy snd
    
-maxiumPointCount / 7
-maxiumPointCount / 3

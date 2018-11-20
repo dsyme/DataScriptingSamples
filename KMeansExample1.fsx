@@ -1,10 +1,10 @@
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
 #load "minimath/KMeans-0.1.fsx"
 
 open FSharp.Charting
-open FSharp.Charting.ChartTypes
 open Samples.FSharp.Math.KMeans
-open Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols
+open FSharp.Data.UnitSystems.SI.UnitSymbols
 
 type Observation = { Time: float<s>; Location: float<m> }
 

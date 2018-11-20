@@ -1,6 +1,9 @@
 
 #load "extlib/EventEx-0.1.fsx"
-#load "packages/FSharp.Charting/FSharp.Charting.fsx"
+#r "nuget:include=FSharp.Charting, version=2.1.0"
+#r "nuget:include=FSharp.Data, version=3.0.0"
+#r "nuget:include=Deedle, version=2.0.0-beta01"
+#load @"C:\Users\dsyme\.nuget\packages\fsharp.charting\2.1.0\FSharp.Charting.fsx"
 #load "vizlib/show.fsx"
 #r "System.Xml.Linq"
 
@@ -10,7 +13,6 @@
 // Reference the FSharp.Data provider 
 
 
-#r "packages/FSharp.Data/lib/net40/FSharp.Data.dll"
 open FSharp.Data
 open FSharp.Charting
 open FSharp.Charting.ChartTypes
@@ -198,22 +200,22 @@ data.Countries.Australia.Indicators.``Population, total``
 // ----------------------------------------------------------------------------
 // Work with time series data
 
-#load "packages/Deedle/Deedle.fsx"
 
+data.Countries.Bangladesh.Indicators.``Access to electricity, rural (% of rural population)``
+|> Chart.Line
 
-data.Countries.``United States``.Indicators.``Health expenditure, total (% of GDP)``
+data.Countries.``West Bank and Gaza``.Indicators.``Access to electricity, rural (% of rural population)``
 |> Chart.Line
 
 
 let countries2 = 
-  [ data.Countries.``United States``; data.Countries.Switzerland
-    data.Countries.Denmark; data.Countries.``United Kingdom``;
+  [ data.Countries.Bangladesh; data.Countries.Lesotho
     data.Countries.``Czech Republic`` ]
 
 Chart.Combine([ for country in countries2 ->
-                    let data = country.Indicators.``Health expenditure per capita (current US$)``
+                    let data = country.Indicators.``Access to electricity, rural (% of rural population)``
                     Chart.Line(data, Name=country.Name) ])
-     .WithTitle("Health expenditure per capita (current US$)")
+     .WithTitle("Access to electricity, rural")
      .WithLegend(InsideArea=false)
 
 

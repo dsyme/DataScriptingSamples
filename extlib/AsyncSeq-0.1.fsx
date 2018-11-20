@@ -516,7 +516,7 @@ module AsyncSeqOperators =
 
         let ofObservable (ev: System.IObservable<'T>) : AsyncSeq<'T> = 
             asyncSeq { 
-                let buffer = MailboxProcessor<_>.Start(fun inbox -> Async.Never)
+                let buffer = MailboxProcessor<_>.Start(fun inbox -> async { while true do do! Async.Sleep 10000 })
                 use _cleanup = ev |> Observable.subscribe buffer.Post 
                 while true do 
                     yield! buffer.Receive() }

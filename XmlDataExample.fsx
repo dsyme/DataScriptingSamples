@@ -1,5 +1,5 @@
 
-#r "packages/FSharp.Data/lib/net40/FSharp.Data.dll"
+#r "nuget:include=FSharp.Data, version=3.0.0"
 #r "System.Xml.Linq.dll"
 open FSharp.Data
 
@@ -21,7 +21,7 @@ let authors = """
   </authors> """
 
 
-type Authors = XmlProvider<"data/Writers.xml">
+type Authors = XmlProvider< const (__SOURCE_DIRECTORY__ + "/data/Writers.xml")>
 let topic = Authors.Parse(authors)
 
 printfn "%s" topic.Topic
